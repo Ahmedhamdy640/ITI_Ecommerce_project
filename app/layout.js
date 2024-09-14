@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import {Roboto} from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,6 +25,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header/>
@@ -31,5 +33,6 @@ export default function RootLayout({ children }) {
         <Footer/>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
