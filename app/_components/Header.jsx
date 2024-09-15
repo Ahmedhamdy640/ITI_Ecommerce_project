@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
+import Cart from "./Cart";
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState()
+  const [openCart, setOpenCart] = useState(false)
   useEffect(() => {
     setIsLoggedIn(window?.location?.href.toString().includes("sign"));
   }, []);
@@ -94,10 +96,11 @@ function Header() {
               ) : (
                 <div className="flex items-center gap-4">
                   <h5 className="flex gap-1 cursor-pointer">
-                    <ShoppingCart />
+                    <ShoppingCart onClick={() => setOpenCart(!openCart)}/>
                     (0)
                   </h5>
                   <UserButton />
+                  {openCart && <Cart />}
                 </div>
               )}
 
