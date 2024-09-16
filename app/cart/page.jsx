@@ -1,25 +1,26 @@
 'use client'
 import React, { useContext } from "react";
-// import { CartContext } from '../_context/CartContext'
+import { CartContext } from '../_context/CartContext';
+import CartApis from "../_utlis/CartApis";
 
 function Cart(){
-    // const { cart, setCart } = useContext(CartContext)
-    // const getTotalAmount=()=>{
-    //     let totalAmount=0;
-    //     cart.forEach(item=>{
-    //         totalAmount= totalAmount +Number(item?.product?.attributes?.price)
-    //     })
-    //     return totalAmount
-    // }
-    // const deleteCartItemFromList =(id)=>{
-    //     CartApis.deleteCartItem(id).then((res) => {
-	// 		if (res) setCart((oldCart) => oldCart.filter(item => item.id !== res?.data?.data?.id))
-	// 	}).catch(error => {
-	// 		console.log('error', error)
-	// 	})
-    // }
+    const { cart, setCart } = useContext(CartContext)
+    const getTotalAmount=()=>{
+        let totalAmount=0;
+        cart.forEach(item=>{
+            totalAmount= totalAmount +Number(item?.product?.attributes?.price)
+        })
+        return totalAmount
+    }
+    const deleteCartItemFromList =(id)=>{
+        CartApis.deleteCartItem(id).then((res) => {
+			if (res) setCart((oldCart) => oldCart.filter(item => item.id !== res?.data?.data?.id))
+		}).catch(error => {
+			console.log('error', error)
+		})
+    }
     return(
-<section>
+  <section>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <header className="text-center">
@@ -28,7 +29,7 @@ function Cart(){
 
       <div className="mt-8">
         <ul className="space-y-4">
-            {/* {cart?.map((item)=>(
+            {cart?.map((item)=>(
                 <li className="flex items-center gap-4">
                 <img
                   src={item?.product?.attributes?.banner?.data?.attributes?.url}
@@ -73,7 +74,7 @@ function Cart(){
                 </div>
               </li>
 
-            ))} */}
+            ))}
           
 
 
@@ -85,7 +86,7 @@ function Cart(){
 
               <div className="flex justify-between !text-base font-medium">
                 <dt>Total</dt>
-                {/* <dd>£{getTotalAmount()}</dd> */}
+                <dd>£{getTotalAmount()}</dd>
               </div>
             </dl>
 
@@ -103,7 +104,7 @@ function Cart(){
       </div>
     </div>
   </div>
-</section>
+  </section>
     )
 }
 export default Cart

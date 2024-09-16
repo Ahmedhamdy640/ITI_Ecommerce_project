@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-// import { CartContext } from '../_context/CartContext'
+import { CartContext } from '../_context/CartContext'
 import Link from "next/link";
 
 function Cart() {
-    // const {cart,setcart}=useContext(CartContext)
+    const {cart,setcart}=useContext(CartContext)
     return(
         <div className='h-[300px] w-[250px]
         bg-gray-100 z-10 rounded-md border shadow-sm
         absolute mx-10 right-10 top-12 p-5 overflow-auto'>
         <div className="mt-4 space-y-6">
     <ul className="space-y-4">
-        {/* {cart?.map((item)=>(
+        {cart?.map((item)=>(
             <li key={item?.id} className="flex items-center gap-4">
             <img
               src={item?.product?.attributes?.banner?.data?.attributes?.url}
@@ -35,7 +35,7 @@ function Cart() {
             </div>
           </li>
 
-        ))} */}
+        ))}
       
       </ul>
       </div>
@@ -44,7 +44,7 @@ function Cart() {
         href="/cart"
         className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
       >
-        {/* View my cart ({cart?.length}) */}
+        View my cart ({cart?.length})
       </Link>
 
       <a
