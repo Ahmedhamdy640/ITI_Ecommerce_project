@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -9,7 +9,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { CartContext } from "./_context/CartContext";
 import { useState } from "react";
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,17 +28,17 @@ const inter = Roboto({ subsets: ["latin"], weight: "700" });
 // };
 
 export default function RootLayout({ children }) {
-  const [cart,setCart] =useState([])
+  const [cart, setCart] = useState([]);
   return (
     <ClerkProvider>
-      <CartContext.Provider value={{cart,setCart}}>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
-      </html>
+      <CartContext.Provider value={{ cart, setCart }}>
+        <html lang="en">
+          <body className={`${geistSans.variable} ${geistMono.variable}`}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </html>
       </CartContext.Provider>
     </ClerkProvider>
   );

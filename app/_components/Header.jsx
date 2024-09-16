@@ -6,39 +6,37 @@ import { useUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
 
-
 import { CartContext } from "../_context/CartContext";
 import CartApis from "../_utlis/CartApis";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const {cart,setCart} = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
     setIsLoggedIn(window?.location?.href.toString().includes("sign"));
   }, []);
   const { user } = useUser();
 
-  useEffect(()=>{
-    user&&getCartItems();
-  },[user])
-  const getCartItems = ()=>{
-    CartApis.getUserCartItems(user.primaryEmailAddress.emailAddress).then(res=>{
-      console.log('responsive from cart items',res?.data?.data)
-      res?.data?.data.forEach(citem=>{
-        setCart((oldCart)=>[
-          ...oldCart,
-          {
-             id: citem.id,
-             product: citem?.attributes?.products?.data[0]
-          }
-        ])
-
-      })
-     
-      
-    })
-  }
+  useEffect(() => {
+    user && getCartItems();
+  }, [user]);
+  const getCartItems = () => {
+    CartApis.getUserCartItems(user.primaryEmailAddress.emailAddress).then(
+      (res) => {
+        console.log("responsive from cart items", res?.data?.data);
+        res?.data?.data.forEach((citem) => {
+          setCart((oldCart) => [
+            ...oldCart,
+            {
+              id: citem.id,
+              product: citem?.attributes?.products?.data[0],
+            },
+          ]);
+        });
+      }
+    );
+  };
 
   return (
     !isLoggedIn && (
@@ -123,10 +121,7 @@ function Header() {
               ) : (
                 <div className="flex items-center gap-4">
                   <h5 className="flex gap-1 cursor-pointer">
-                    <ShoppingCart />
-
-                    ({cart?.lenght})
-
+                    <ShoppingCart />({cart.length})
                   </h5>
                   <UserButton />
                 </div>
