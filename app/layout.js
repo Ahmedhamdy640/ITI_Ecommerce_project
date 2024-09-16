@@ -6,8 +6,10 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import { Roboto } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+
 import { CartContext } from "./_context/CartContext";
 import { useState } from "react";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

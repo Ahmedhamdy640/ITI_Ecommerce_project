@@ -7,6 +7,7 @@ import CartApis from '../../_utlis/CartApis';
 import { data } from "autoprefixer";
 import { CartContext } from "@/app/_context/CartContext";
 
+
 // Example spinner component
 function Spinner() {
   return (
@@ -23,7 +24,7 @@ function ProductInfo({ product }) {
 
   const { user } = useUser();
   const router = useRouter();
-  const {cart,setCart} = useContext(CartContext)
+  const {cart,setCart} = useContext(CartContext);
 
   const handleAddToCart = () => {
     if (!user) {
@@ -51,6 +52,7 @@ function ProductInfo({ product }) {
         console.log('error', error);
         
       })
+
     }
   };
 

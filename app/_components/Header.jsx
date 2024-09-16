@@ -1,19 +1,24 @@
 "use client";
+
 import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
+
+
 import { CartContext } from "../_context/CartContext";
 import CartApis from "../_utlis/CartApis";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const {cart,setCart} = useContext(CartContext)
+
   useEffect(() => {
     setIsLoggedIn(window?.location?.href.toString().includes("sign"));
   }, []);
   const { user } = useUser();
+
   useEffect(()=>{
     user&&getCartItems();
   },[user])
@@ -34,6 +39,7 @@ function Header() {
       
     })
   }
+
   return (
     !isLoggedIn && (
       <header className="bg-white dark:bg-gray-900">
@@ -118,7 +124,9 @@ function Header() {
                 <div className="flex items-center gap-4">
                   <h5 className="flex gap-1 cursor-pointer">
                     <ShoppingCart />
+
                     ({cart?.lenght})
+
                   </h5>
                   <UserButton />
                 </div>
