@@ -7,7 +7,6 @@ import { UserButton } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
 import Cart from "./Cart";
 
-
 import { CartContext } from "../_context/CartContext";
 import CartApis from "../_utlis/CartApis";
 
@@ -21,26 +20,25 @@ function Header() {
   }, []);
   const { user } = useUser();
 
-  useEffect(()=>{
-    user&&getCartItems();
-  },[user])
-  const getCartItems = ()=>{
-    CartApis.getUserCartItems(user.primaryEmailAddress.emailAddress).then(res=>{
-      console.log('responsive from cart items',res?.data?.data)
-      res?.data?.data.forEach(citem=>{
-        setCart((oldCart)=>[
-          ...oldCart,
-          {
-             id: citem.id,
-             product: citem?.attributes?.products?.data[0]
-          }
-        ])
-
-      })
-     
-      
-    })
-  }
+  useEffect(() => {
+    user && getCartItems();
+  }, [user]);
+  const getCartItems = () => {
+    CartApis.getUserCartItems(user.primaryEmailAddress.emailAddress).then(
+      (res) => {
+        console.log("responsive from cart items", res?.data?.data);
+        res?.data?.data.forEach((citem) => {
+          setCart((oldCart) => [
+            ...oldCart,
+            {
+              id: citem.id,
+              product: citem?.attributes?.products?.data[0],
+            },
+          ]);
+        });
+      }
+    );
+  };
 
   return (
     !isLoggedIn && (
@@ -130,7 +128,6 @@ function Header() {
                     <ShoppingCart />
 
                     ({cart?.lenght})
-
                   </h5>
                   <UserButton />
                   {openCart && <Cart />}

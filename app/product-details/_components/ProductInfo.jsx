@@ -3,10 +3,9 @@ import React, { useContext } from "react";
 import { ShoppingCart } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import CartApis from '../../_utlis/CartApis';
+import CartApis from "../../_utlis/CartApis";
 import { data } from "autoprefixer";
 import { CartContext } from "@/app/_context/CartContext";
-
 
 // Example spinner component
 function Spinner() {
@@ -24,7 +23,7 @@ function ProductInfo({ product }) {
 
   const { user } = useUser();
   const router = useRouter();
-  const {cart,setCart} = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
     if (!user) {
@@ -35,24 +34,23 @@ function ProductInfo({ product }) {
         data: {
           userName: user.fullName,
           email: user.primaryEmailAddress.emailAddress,
-          products: [product?.id]
-        }
-      }
-      CartApis.addToCard(data).then( res=> {
-        console.log('cart created successfully', res.data.data);
-        setCart(oldCart=>[
-          ...oldCart,
-          {
-            id:res?.data?.data?.id,
-            product:
-
-          }
-        ])
-      }).catch( error=> {
-        console.log('error', error);
-        
-      })
-
+          products: [product?.id],
+        },
+      };
+      CartApis.addToCard(data)
+        .then((res) => {
+          console.log("cart created successfully", res.data.data);
+          setCart((oldCart) => [
+            ...oldCart,
+            {
+              id: res?.data?.data?.id,
+              product,
+            },
+          ]);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
     }
   };
 
