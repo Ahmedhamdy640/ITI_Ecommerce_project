@@ -1,18 +1,47 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
 import Cart from "./Cart";
 
+
+import { CartContext } from "../_context/CartContext";
+import CartApis from "../_utlis/CartApis";
+
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState()
   const [openCart, setOpenCart] = useState(false)
+  const {cart,setCart} = useContext(CartContext)
+
   useEffect(() => {
     setIsLoggedIn(window?.location?.href.toString().includes("sign"));
   }, []);
   const { user } = useUser();
+
+  useEffect(()=>{
+    user&&getCartItems();
+  },[user])
+  const getCartItems = ()=>{
+    CartApis.getUserCartItems(user.primaryEmailAddress.emailAddress).then(res=>{
+      console.log('responsive from cart items',res?.data?.data)
+      res?.data?.data.forEach(citem=>{
+        setCart((oldCart)=>[
+          ...oldCart,
+          {
+             id: citem.id,
+             product: citem?.attributes?.products?.data[0]
+          }
+        ])
+
+      })
+     
+      
+    })
+  }
+
   return (
     !isLoggedIn && (
       <header className="bg-white dark:bg-gray-900">
@@ -98,6 +127,10 @@ function Header() {
                   <h5 className="flex gap-1 cursor-pointer">
                     <ShoppingCart onClick={() => setOpenCart(!openCart)}/>
                     (0)
+                    <ShoppingCart />
+
+                    ({cart?.lenght})
+
                   </h5>
                   <UserButton />
                   {openCart && <Cart />}
