@@ -1,5 +1,4 @@
 "use client";
-import "bootstrap/dist/css/bootstrap.min.css";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./_components/Header";

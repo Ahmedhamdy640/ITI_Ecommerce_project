@@ -2,9 +2,11 @@
 import React, { useContext } from "react";
 import { CartContext } from "../_context/CartContext";
 import CartApis from "../_utlis/CartApis";
+import { useUser } from "@clerk/nextjs";
 
 function Cart() {
   const { cart, setCart } = useContext(CartContext);
+  const { user } = useUser();
   const getTotalAmount = () => {
     let totalAmount = 0;
     cart.forEach((item) => {
@@ -24,6 +26,48 @@ function Cart() {
         console.log("error", error);
       });
   };
+
+  // const handleCheckoutClick = async () => {
+  //   try {
+  //     const res = await fetch("api/send-email", {
+  //       method: "POST",
+  //     });
+  //     if (!res.ok) {
+  //       throw new Error(`Email sending failed with status ${res.status}`);
+  //     }
+  //     for (const el of cart) {
+  //       deleteCartItemFromList(el?.id);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during checkout:", error);
+  //   }
+  // };
+  const handleCheckoutClick = async () => {
+    try {
+      for (let el of cart) {
+        console.log(cart);
+        deleteCartItemFromList(el?.id);
+      }
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+      });
+
+      // if (!res.ok) {
+      //   throw new Error(`Email sending failed with status ${res.status}`);
+      // }
+
+      // Clear the cart after successful email sending
+      // setCart([]);
+
+      // Optionally, loop through cart items and delete them from the server if needed
+      // for (const el of cart) {
+      //   deleteCartItemFromList(el?.id);
+      // }
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -91,8 +135,9 @@ function Cart() {
 
                 <div className="flex justify-end">
                   <a
-                    href="#"
+                    href="/"
                     className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    onClick={handleCheckoutClick}
                   >
                     Checkout
                   </a>
