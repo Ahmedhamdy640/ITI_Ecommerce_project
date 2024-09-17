@@ -6,7 +6,7 @@ function Hero() {
       <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen ">
         <div className="mx-auto max-w-xl text-center">
           <h1 className="text-3xl font-extrabold sm:text-5xl">
-            All Your Digital Products.
+            THE MOBILE YOU WANT.
             <strong className="font-extrabold text-[#08D9D6] sm:block">
               {" "}
               Is One Click Away{" "}
@@ -14,7 +14,7 @@ function Hero() {
           </h1>
 
           <p className="mt-4 sm:text-xl/relaxed">
-            Start Exploring State Of The Art Assets Now !
+            Start Exploring the World of Mobile !
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

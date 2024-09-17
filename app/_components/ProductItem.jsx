@@ -8,7 +8,7 @@ const ProductItem = ({ productItem }) => {
     <Link
       href={`/product-details/${productItem?.id}`}
       style={{ textDecoration: "none", color: "black" }}
-      className="flex flex-row justify-between w-[300px] bg-slate-100 mx-10 my-5 px-4 py-3 rounded-lg hover:border p-1 hover:shadow-md border-teal-400 hover:cursor-pointer"
+      className="flex flex-row justify-between w-[350px] md:w-[300px] bg-slate-100 mx-10 my-5 px-4 py-3 rounded-lg hover:border p-1 hover:shadow-md border-teal-400 hover:cursor-pointer"
     >
       <div className="flex flex-col justify-between mr-3">
         <h6>{productItem?.attributes?.title}</h6>
