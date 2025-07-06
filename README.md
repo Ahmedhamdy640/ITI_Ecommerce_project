@@ -13,6 +13,9 @@ pnpm dev
 # or
 bun dev
 ```
+https://drive.google.com/file/d/1qnVycCbVaMM1a-2WjLP0ZJD-PjcreJvT/view?usp=sharing
+
+[![Watch the Video](https://img.shields.io/badge/▶-Watch_Video-blue?style=for-the-badge)](https://drive.google.com/file/d/1qnVycCbVaMM1a-2WjLP0ZJD-PjcreJvT/view)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
